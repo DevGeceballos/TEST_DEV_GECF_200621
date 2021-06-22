@@ -1,0 +1,139 @@
+<div class="col-md-12 mt-5" *ngIf="identity">
+	<h1>{{page_title}}</h1>
+
+<div class="container mt-5">
+    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" (click)="clickFunction()">
+   Agregar persona
+  </button>
+
+<table  id="tablePer" class="table table-striped mt-5">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>FechaRegistro</th>
+            <th>FechaActualizacion</th>
+            <th>Nombre completo</th>
+            <th>RFC</th>
+            <th>FechaNacimiento</th>
+            <th>UsuarioAgrega</th>                        
+            <th>Estatus</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+            <tr *ngFor="let people of personasfisicas; let i = index">
+            <td>{{people.IdPersonaFisica}}</td>
+            <td>{{people.FechaRegistro}}</td>
+            <td>{{people.FechaActualizacion}}</td>
+            <td>{{people.Nombre}} {{people.ApellidoPaterno}} {{people.ApellidoMaterno}}</td>            
+            <td>{{people.RFC}}</td>                        
+            <td>{{people.FechaNacimiento}}</td> 
+            <td>{{people.UsuarioAgrega}}</td> 
+            <td >Activo</td> 
+            <td>
+    <form class="col-md-8 ml-0 pl-0" #registerForm="ngForm" (ngSubmit)="onSubmitC(i)">              
+      <button type="submit" class="btn btn-warning" data-toggle="modal" data-target="#myModal" style="margin-right: 5px" value="{{people.IdPersonaFisica}}" (click)="clickFunction2()">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="black" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                    <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                    <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                  </svg>                              
+      </button> 
+    </form> 
+    <form class="col-md-8 ml-0 pl-0" #registerForm="ngForm" (ngSubmit)="onSubmitD(people.IdPersonaFisica)">         
+    <button type="submit" class="btn btn-danger" data-toggle="modal">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="black" class="bi bi-trash" viewBox="0 0 16 16">
+                  <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                  <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                </svg>                
+    </button>  
+  </form>
+            </td> 
+
+        </tr>
+    </tbody>
+</table>
+
+
+  <!-- The Modal -->
+  <div class="modal fade" id="myModal">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title" id="title1">Agregar nueva persona fisica</h4>
+          <h4 class="modal-title" id="title2" >Actualizar persona fisica</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body">
+
+          <form class="col-md-8 ml-0 pl-0" #registerForm="ngForm" (ngSubmit)="onSubmit(registerForm)" id ="registerForm">
+            <div class="form-group" hidden="hidden">
+              <label for="ID">ID</label>
+              <input type="text" name="ID" class="form-control" placeholder="" #ID="ngModel" [(ngModel)]="addPerson.IdPersonaFisica" id ="hideID">
+  
+            </div>
+
+            <div class="form-group">
+              <label for="Nombre">Nombre</label>
+              <input type="text" name="Nombre" class="form-control" placeholder="" #Nombre="ngModel" [(ngModel)]="addPerson.Nombre" required pattern="[a-zA-Z]+">
+
+              <small *ngIf="!Nombre.valid && Nombre.touched" class="invalid-feedback d-block"> El nombre no es válido</small>   
+            </div>
+
+            <div class="form-group">
+              <label for="ApellidoPaterno">Apellido paterno</label>
+              <input type="text" name="ApellidoPaterno" class="form-control" placeholder="" #ApellidoPaterno="ngModel" [(ngModel)]="addPerson.ApellidoPaterno" required pattern="[a-zA-Z]+">
+
+              <small *ngIf="!ApellidoPaterno.valid && ApellidoPaterno.touched" class="invalid-feedback d-block"> El Apellido Paterno no es válido</small>   
+            </div>
+
+            <div class="form-group">
+              <label for="ApellidoMaterno">Apellido materno</label>
+              <input type="text" name="ApellidoMaterno" class="form-control" placeholder="" #ApellidoMaterno="ngModel" [(ngModel)]="addPerson.ApellidoMaterno" required pattern="[a-zA-Z]+">
+
+              <small *ngIf="!ApellidoMaterno.valid && ApellidoMaterno.touched" class="invalid-feedback d-block"> El Apellido Materno no es válido</small>   
+            </div>
+
+            <div class="form-group">
+              <label for="RFC">RFC</label>
+              <input type="text" name="RFC" class="form-control" placeholder="" #RFC="ngModel" [(ngModel)]="addPerson.RFC" required maxlength="13" pattern=".{13,13}">
+
+              <small *ngIf="!RFC.valid && RFC.touched" class="invalid-feedback d-block"> El RFC no es válido</small>   
+            </div>
+
+            <div class="form-group">
+              <label for="FechaNacimiento">Fecha de nacimiento</label>
+              <input type="date" name="FechaNacimiento" class="form-control" placeholder="" #FechaNacimiento="ngModel" [(ngModel)]="addPerson.FechaNacimiento" required>
+
+              <small *ngIf="!FechaNacimiento.valid && FechaNacimiento.touched" class="invalid-feedback d-block"> El fecha de nacimiento no es válida</small>   
+            </div>
+
+            <div class="form-group">
+              <label for="UsuarioAgrega">Usuario agrega</label>
+              <input type="number" name="UsuarioAgrega" class="form-control" placeholder="" #UsuarioAgrega="ngModel" [(ngModel)]="addPerson.UsuarioAgrega" required>
+
+              <small *ngIf="!UsuarioAgrega.valid && UsuarioAgrega.touched" class="invalid-feedback d-block"> El fecha de nacimiento no es válida</small>   
+            </div>
+            <input id="bot1" type="submit" value="Agregar" name="registrate" class="btn btn-success" [disabled]="registerForm.invalid">
+            <input id="bot2" type="submit" value="Actualizar" name="registrate" class="btn btn-success" [disabled]="registerForm.invalid">            
+          </form>
+
+
+        </div>
+        
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-info" data-dismiss="modal">Cerrar</button>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+</div>

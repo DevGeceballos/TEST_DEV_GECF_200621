@@ -1,0 +1,82 @@
+<div class="col-md-12 mt-5" *ngIf="identity">
+	<h1>{{page_title}}</h1>
+	<p>
+		Reporte de datos
+	</p>
+
+	<table  id="tablecustomer" class="table table-striped mt-5" #table>
+	    <thead>
+	        <tr>
+	            <th>#</th>
+	            <th>Fecha Registro Empresa</th>
+	            <th>Id Cliente</th>
+	            <th>Id Empleado</th>
+	            <th>Id viaje</th>
+	            <th>Apellido materno</th>
+	            <th>Nombre</th>
+	            <th>Apellido paterno</th>
+	            <th>RFC</th>
+	            <th>Razón social</th>
+	            <th>Sucursal</th>
+
+	        </tr>
+	    </thead>
+	    <tbody>
+	            <tr *ngFor="let customer of customer; let i = index">
+	            <td>{{i+1}}</td>
+	            <td>{{customer.FechaRegistroEmpresa}}</td>
+	            <td>{{customer.IdCliente}}</td>
+	            <td>{{customer.IdEmpleado}}</td>
+	            <td>{{customer.IdViaje}}</td>
+	            <td>{{customer.Materno}}</td>
+	            <td>{{customer.Nombre}}</td>
+	            <td>{{customer.Paterno}}</td>
+	            <td>{{customer.RFC}}</td>
+	            <td>{{customer.RazonSocial}}</td>
+	            <td>{{customer.Sucursal}}</td>
+
+
+	        </tr>
+	    </tbody>
+	</table>
+<button type="button" class="btn btn-primary" (click)="fireEvent(1)">Exportar vista actual de la tabla</button>
+<br>
+	<table  id="tablecustomer2" class="table table-striped mt-5" #table2 hidden="hidden">
+	    <thead>
+	        <tr>
+	            <th>#</th>
+	            <th>Fecha Registro Empresa</th>
+	            <th>Id Cliente</th>
+	            <th>Id Empleado</th>
+	            <th>Id viaje</th>
+	            <th>Apellido materno</th>
+	            <th>Nombre</th>
+	            <th>Apellido paterno</th>
+	            <th>RFC</th>
+	            <th>Razón social</th>
+	            <th>Sucursal</th>
+
+	        </tr>
+	    </thead>
+	    <tbody>
+	            <tr *ngFor="let customer of customer; let i = index">
+	            <td>{{i+1}}</td>
+	            <td>{{customer.FechaRegistroEmpresa}}</td>
+	            <td>{{customer.IdCliente}}</td>
+	            <td>{{customer.IdEmpleado}}</td>
+	            <td>{{customer.IdViaje}}</td>
+	            <td>{{customer.Materno}}</td>
+	            <td>{{customer.Nombre}}</td>
+	            <td>{{customer.Paterno}}</td>
+	            <td>{{customer.RFC}}</td>
+	            <td>{{customer.RazonSocial}}</td>
+	            <td>{{customer.Sucursal}}</td>
+
+
+	        </tr>
+	    </tbody>
+	</table>
+<button type="button" class="btn btn-info mt-2" (click)="fireEvent(2)" style="margin-bottom: 40px">Exportar todos los registros</button>
+</div>
+
+

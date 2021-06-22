@@ -1,0 +1,36 @@
+<div class="container mt-5" > <!--Contenedor principal-->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" [routerLink]="['']">Toka exam</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item" *ngIf="identity">
+        <a class="nav-link" [routerLink]="['/personasfisicas']">Modificación de datos de personas fisicas <span class="sr-only"></span></a>
+      </li>
+      <li class="nav-item" *ngIf="identity">
+        <a class="nav-link" [routerLink]="['/reporte']">Reporte de datos <span class="sr-only"></span></a>
+      </li>
+
+    </ul>
+    <ul class="navbar-nav navbar-right">
+      <li class="nav-item" *ngIf="!identity">
+        <a class="nav-link" [routerLink]="['/registro']">Registro <span class="sr-only"></span></a>
+      </li>
+      <li class="nav-item dropdown " *ngIf="identity">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Bienvenido: {{ identity}}
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item"[routerLink]="['/logout/1']">Cerrar sesión</a>
+        </div>
+      </li>      
+    </ul>
+  </div>
+</nav> 
+<router-outlet></router-outlet> 
+
+</div>
+
